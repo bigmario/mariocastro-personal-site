@@ -1,13 +1,13 @@
 
 import { Component, signal, computed } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 type Lang = 'en' | 'es';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage],
+  imports: [CommonModule],
   templateUrl: './app.component.html',
 })
 export class AppComponent {
