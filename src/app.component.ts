@@ -91,12 +91,11 @@ export class AppComponent {
             role: 'Full Stack Developer',
             period: 'Feb 2024 – Present',
             description: [
-              'Developed an AI-First Calibration System for fuel truck management using SQL validation and sensor data analysis.',
-              'Implemented automated workflows with self-hosted n8n to optimize internal processes.',
-              'Built administrative modules using Angular (Frontend) and Node.js (Backend).',
-              'Managed SQL databases ensuring data integrity for critical systems.'
+              'Analysis, issue resolution, and development of new modules for administrative systems.',
+              'Implementation of frontend features using Angular and backend APIs with Node.js, ensuring integration with SQL databases.',
+              'Automations using n8n and AI.'
             ],
-            tech: ['Angular', 'Node.js', 'n8n', 'AI', 'SQL']
+            tech: ['Angular', 'TypeScript', 'Node.js', 'MySQL', 'Git', 'n8n', 'AI']
           },
           {
             company: 'POS Global C.A.',
@@ -200,12 +199,11 @@ export class AppComponent {
             role: 'Desarrollador Full Stack',
             period: 'Feb 2024 – Presente',
             description: [
-              'Desarrollé un Sistema de Calibración "AI-First" para gestión de camiones de combustible usando validación SQL y análisis de sensores.',
-              'Implementé flujos automatizados con n8n autoalojado para optimizar procesos internos.',
-              'Construí módulos administrativos usando Angular (Frontend) y Node.js (Backend).',
-              'Administré bases de datos SQL asegurando integridad de datos para sistemas críticos.'
+              'Análisis, resolución de incidencias y desarrollo de nuevos módulos para sistemas administrativos.',
+              'Implementación de funcionalidades frontend con Angular y APIs backend con Node.js, garantizando la integración con bases de datos SQL.',
+              'Automatizaciones con n8n y IA.'
             ],
-            tech: ['Angular', 'Node.js', 'n8n', 'AI', 'SQL']
+            tech: ['Angular', 'TypeScript', 'Node.js', 'MySQL', 'Git', 'n8n', 'IA']
           },
           {
             company: 'POS Global C.A.',
