@@ -20,7 +20,7 @@ export class AppComponent {
   profile = {
     name: 'Mario Castro',
     email: 'mariocastro.pva@gmail.com',
-    phone: '+584124679782',
+    phone: '+58 414-4418611 / +58 412-4679782',
     linkedin: 'linkedin.com/in/mariocastrove',
     github: 'github.com/bigmario',
   };
