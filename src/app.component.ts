@@ -155,7 +155,7 @@ export class AppComponent {
         summary: 'Desarrollador Full Stack con amplia trayectoria en el ciclo de vida del desarrollo de software. Especialista en la creación de soluciones escalables y automatización de procesos mediante IA. Experto en arquitecturas robustas con TypeScript, Angular y Node.js, con un enfoque práctico en la optimización operativa y la implementación de flujos de trabajo inteligentes.',
         education: {
           title: 'Educación',
-          degree: 'Ingeniero en Computación',
+          degree: 'Licenciado en Computación',
           school: 'Universidad de Carabobo (1997-2007)'
         },
         languages: {
