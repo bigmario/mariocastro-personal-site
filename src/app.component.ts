@@ -114,9 +114,9 @@ export class AppComponent {
             role: 'Semi-Senior Developer',
             period: 'Jul 2021 – Jan 2022',
             description: [
-              'Analysis, development, and implementation of a Data Warehouse for efficient business data centralization.',
-              'Implemented robust scheduled tasks and ETL processes connecting external APIs and MongoDB databases using Python and Celery.',
-              'Orchestrated simultaneous data processing using RabbitMQ as a message broker service to ensure real-time data integrity.'
+              'Analysis, development, and implementation of Data Warehouse.',
+              'Implementation of scheduled tasks with Python and Celery for ETL data processes from APIs and MongoDB.',
+              'Simultaneous data processing using RabbitMQ as a Broker service.'
             ],
             tech: ['Python', 'Celery', 'RabbitMQ', 'MongoDB', 'ETL']
           },
@@ -223,9 +223,9 @@ export class AppComponent {
             role: 'Desarrollador Semi-Senior',
             period: 'Jul 2021 – Ene 2022',
             description: [
-              'Análisis, desarrollo e implementación de Data Warehouse para la centralización eficiente de datos del negocio.',
-              'Implementación de tareas programadas y procesos ETL robustos conectando APIs y MongoDB utilizando Python y Celery.',
-              'Orquestación de procesamiento de datos simultáneo utilizando RabbitMQ como broker de mensajería para garantizar la integridad en tiempo real.'
+              'Análisis, desarrollo e implementación de Data Warehouse.',
+              'Implementación de tareas programadas con Python y Celery para procesos de ETL de datos desde APIs y MongoDB.',
+              'Procesamiento simultáneo de datos usando RabbitMQ como servicio de Broker.'
             ],
             tech: ['Python', 'Celery', 'RabbitMQ', 'MongoDB', 'ETL']
           },
