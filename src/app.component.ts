@@ -91,9 +91,9 @@ export class AppComponent {
             role: 'Full Stack Developer',
             period: 'Feb 2024 – Present',
             description: [
-              'Analysis, issue resolution, and development of new modules for administrative systems.',
-              'Implementation of frontend features using Angular and backend APIs with Node.js, ensuring integration with SQL databases.',
-              'Automations using n8n and AI.'
+              'Developed administrative modules and full-stack features using Angular and Node.js, ensuring robust integration with SQL databases.',
+              'Designed and implemented intelligent workflow automations using n8n and AI logic to optimize internal processes.',
+              'Led the analysis and resolution of critical incidents, ensuring high availability and stability of administrative systems.'
             ],
             tech: ['Angular', 'TypeScript', 'Node.js', 'MySQL', 'Git', 'n8n', 'AI']
           },
@@ -114,8 +114,9 @@ export class AppComponent {
             role: 'Semi-Senior Developer',
             period: 'Jul 2021 – Jan 2022',
             description: [
-              'Developed Data Warehouse and ETL process automation using Python and Celery.',
-              'Integrated messaging services with RabbitMQ for synchronous/asynchronous data processing.'
+              'Analysis, development, and implementation of a Data Warehouse for efficient business data centralization.',
+              'Implemented robust scheduled tasks and ETL processes connecting external APIs and MongoDB databases using Python and Celery.',
+              'Orchestrated simultaneous data processing using RabbitMQ as a message broker service to ensure real-time data integrity.'
             ],
             tech: ['Python', 'Celery', 'RabbitMQ', 'MongoDB', 'ETL']
           },
@@ -199,9 +200,9 @@ export class AppComponent {
             role: 'Desarrollador Full Stack',
             period: 'Feb 2024 – Presente',
             description: [
-              'Análisis, resolución de incidencias y desarrollo de nuevos módulos para sistemas administrativos.',
-              'Implementación de funcionalidades frontend con Angular y APIs backend con Node.js, garantizando la integración con bases de datos SQL.',
-              'Automatizaciones con n8n y IA.'
+              'Desarrollé módulos administrativos y funcionalidades full-stack utilizando Angular y Node.js, asegurando una integración robusta con bases de datos SQL.',
+              'Diseñé e implementé automatizaciones de flujos de trabajo inteligentes con n8n e IA para optimizar procesos internos.',
+              'Análisis y resolución de incidencias críticas, garantizando la alta disponibilidad y estabilidad de los sistemas administrativos.'
             ],
             tech: ['Angular', 'TypeScript', 'Node.js', 'MySQL', 'Git', 'n8n', 'IA']
           },
@@ -222,8 +223,9 @@ export class AppComponent {
             role: 'Desarrollador Semi-Senior',
             period: 'Jul 2021 – Ene 2022',
             description: [
-              'Desarrollé Data Warehouse y automatización ETL usando Python y Celery.',
-              'Integré servicios de mensajería con RabbitMQ para procesamiento de datos síncrono/asíncrono.'
+              'Análisis, desarrollo e implementación de Data Warehouse para la centralización eficiente de datos del negocio.',
+              'Implementación de tareas programadas y procesos ETL robustos conectando APIs y MongoDB utilizando Python y Celery.',
+              'Orquestación de procesamiento de datos simultáneo utilizando RabbitMQ como broker de mensajería para garantizar la integridad en tiempo real.'
             ],
             tech: ['Python', 'Celery', 'RabbitMQ', 'MongoDB', 'ETL']
           },
