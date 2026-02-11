@@ -1,20 +1,31 @@
 
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 
 type Lang = 'en' | 'es';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './app.component.html',
 })
 export class AppComponent {
+  private fb = inject(FormBuilder);
+
   // Navigation & UI State
   isMenuOpen = signal(false);
+  isContactModalOpen = signal(false);
   language = signal<Lang>('en');
   currentYear = new Date().getFullYear();
+
+  // Contact Form
+  contactForm = this.fb.group({
+    name: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    message: ['', Validators.required]
+  });
 
   // Static Profile Data (Universal)
   profile = {
@@ -132,6 +143,21 @@ export class AppComponent {
           }
         ]
       },
+      contact: {
+        title: 'Contact Me',
+        name: 'Name',
+        email: 'Email',
+        message: 'Message',
+        send: 'Send Message',
+        cancel: 'Cancel',
+        success: 'Message sent successfully!',
+        errors: {
+          nameRequired: 'Name is required.',
+          emailRequired: 'Email is required.',
+          emailInvalid: 'Invalid email format.',
+          messageRequired: 'Message is required.'
+        }
+      },
       footer: {
         rights: 'Mario Castro. All rights reserved. Built with Angular & Tailwind.'
       }
@@ -241,6 +267,21 @@ export class AppComponent {
           }
         ]
       },
+      contact: {
+        title: 'Contáctame',
+        name: 'Nombre',
+        email: 'Correo Electrónico',
+        message: 'Mensaje',
+        send: 'Enviar Mensaje',
+        cancel: 'Cancelar',
+        success: '¡Mensaje enviado con éxito!',
+        errors: {
+          nameRequired: 'El nombre es obligatorio.',
+          emailRequired: 'El correo electrónico es obligatorio.',
+          emailInvalid: 'Formato de correo inválido.',
+          messageRequired: 'El mensaje es obligatorio.'
+        }
+      },
       footer: {
         rights: 'Mario Castro. Todos los derechos reservados. Construido con Angular y Tailwind.'
       }
@@ -263,6 +304,27 @@ export class AppComponent {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  openContactModal() {
+    this.isContactModalOpen.set(true);
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeContactModal() {
+    this.isContactModalOpen.set(false);
+    document.body.style.overflow = '';
+  }
+
+  onSubmit() {
+    if (this.contactForm.valid) {
+      console.log('Form Submitted', this.contactForm.value);
+      alert(this.content().contact.success);
+      this.contactForm.reset();
+      this.closeContactModal();
+    } else {
+      this.contactForm.markAllAsTouched();
     }
   }
 }
