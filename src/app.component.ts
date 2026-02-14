@@ -2,6 +2,8 @@
 import { Component, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 type Lang = 'en' | 'es';
 
@@ -13,10 +15,12 @@ type Lang = 'en' | 'es';
 })
 export class AppComponent {
   private fb = inject(FormBuilder);
+  private http = inject(HttpClient);
 
   // Navigation & UI State
   isMenuOpen = signal(false);
   isContactModalOpen = signal(false);
+  isSubmitting = signal(false);
   language = signal<Lang>('en');
   currentYear = new Date().getFullYear();
 
@@ -156,7 +160,10 @@ export class AppComponent {
           emailRequired: 'Email is required.',
           emailInvalid: 'Invalid email format.',
           messageRequired: 'Message is required.'
-        }
+        },
+        errorTitle: 'Error',
+        errorMessage: 'There was a problem sending your message. Please try again later.',
+        okButton: 'OK'
       },
       footer: {
         rights: 'Mario Castro. All rights reserved. Built with Angular & Tailwind.'
@@ -280,7 +287,10 @@ export class AppComponent {
           emailRequired: 'El correo electrónico es obligatorio.',
           emailInvalid: 'Formato de correo inválido.',
           messageRequired: 'El mensaje es obligatorio.'
-        }
+        },
+        errorTitle: 'Error',
+        errorMessage: 'Hubo un problema al enviar tu mensaje. Por favor intenta más tarde.',
+        okButton: 'Aceptar'
       },
       footer: {
         rights: 'Mario Castro. Todos los derechos reservados. Construido con Angular y Tailwind.'
@@ -318,11 +328,49 @@ export class AppComponent {
   }
 
   onSubmit() {
-    if (this.contactForm.valid) {
-      console.log('Form Submitted', this.contactForm.value);
-      alert(this.content().contact.success);
-      this.contactForm.reset();
-      this.closeContactModal();
+    if (this.contactForm.valid && !this.isSubmitting()) {
+      this.isSubmitting.set(true);
+      const formData = {
+        nombre: this.contactForm.value.name,
+        email: this.contactForm.value.email,
+        mensaje: this.contactForm.value.message
+      };
+
+      this.http.post('https://n8n.mariocastro.dev/webhook/5a27094c-cbe3-4294-8b48-da5f9b2b51f7', formData)
+        .subscribe({
+          next: () => {
+            this.isSubmitting.set(false);
+            Swal.fire({
+              title: this.content().contact.success,
+              icon: 'success',
+              background: '#0f172a', // slate-900
+              color: '#e2e8f0', // slate-200
+              confirmButtonColor: '#0891b2', // cyan-600
+              confirmButtonText: this.content().contact.okButton,
+              customClass: {
+                popup: 'border border-slate-700/50 rounded-xl shadow-2xl shadow-cyan-500/10'
+              }
+            });
+            this.contactForm.reset();
+            this.closeContactModal();
+          },
+          error: (err) => {
+            this.isSubmitting.set(false);
+            console.error('Error sending message:', err);
+            Swal.fire({
+              title: this.content().contact.errorTitle,
+              text: this.content().contact.errorMessage,
+              icon: 'error',
+              background: '#0f172a', // slate-900
+              color: '#e2e8f0', // slate-200
+              confirmButtonColor: '#ef4444', // red-500
+              confirmButtonText: this.content().contact.okButton,
+              customClass: {
+                popup: 'border border-slate-700/50 rounded-xl shadow-2xl shadow-red-500/10'
+              }
+            });
+          }
+        });
     } else {
       this.contactForm.markAllAsTouched();
     }
