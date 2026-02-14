@@ -28,7 +28,8 @@ export class AppComponent {
   contactForm = this.fb.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    message: ['', Validators.required]
+    message: ['', Validators.required],
+    fax: [''] // Honeypot field
   });
 
   // Static Profile Data (Universal)
@@ -328,6 +329,37 @@ export class AppComponent {
   }
 
   onSubmit() {
+    // 1. Honeypot check
+    if (this.contactForm.get('fax')?.value) {
+      console.warn('Bot detected via honeypot');
+      return; // Silently fail
+    }
+
+    // 2. Rate Limiting Check (2 minutes cooldown)
+    const lastSubmission = localStorage.getItem('lastContactSubmission');
+    if (lastSubmission) {
+      const timeSinceLast = Date.now() - parseInt(lastSubmission, 10);
+      const cooldownMs = 2 * 60 * 1000; // 2 minutes
+
+      if (timeSinceLast < cooldownMs) {
+        Swal.fire({
+          title: this.content().contact.errorTitle,
+          text: this.language() === 'es' 
+            ? 'Por favor espera unos minutos antes de enviar otro mensaje.' 
+            : 'Please wait a few minutes before sending another message.',
+          icon: 'warning',
+          background: '#0f172a',
+          color: '#e2e8f0',
+          confirmButtonColor: '#0891b2',
+          confirmButtonText: this.content().contact.okButton,
+          customClass: {
+            popup: 'border border-slate-700/50 rounded-xl shadow-2xl shadow-cyan-500/10'
+          }
+        });
+        return;
+      }
+    }
+
     if (this.contactForm.valid && !this.isSubmitting()) {
       this.isSubmitting.set(true);
       const formData = {
@@ -340,6 +372,9 @@ export class AppComponent {
         .subscribe({
           next: () => {
             this.isSubmitting.set(false);
+            // Save submission time
+            localStorage.setItem('lastContactSubmission', Date.now().toString());
+            
             Swal.fire({
               title: this.content().contact.success,
               icon: 'success',

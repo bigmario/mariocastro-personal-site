@@ -450,6 +450,12 @@
             }
           </div>
 
+          <!-- Honeypot Field (Hidden) -->
+          <div class="hidden" aria-hidden="true">
+            <label for="fax" class="block text-sm font-medium text-slate-300 mb-1">Fax</label>
+            <input type="text" id="fax" formControlName="fax" tabindex="-1" autocomplete="off">
+          </div>
+
           <!-- Footer -->
           <div class="pt-4 flex justify-end gap-3">
             <button type="button" (click)="closeContactModal()" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition-colors">
