@@ -1,0 +1,73 @@
+<!-- Navigation -->
+<nav class="fixed w-full z-50 glass-nav border-b border-slate-800/50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex-shrink-0 cursor-pointer" (click)="portfolioService.scrollTo('hero')">
+        <span class="text-xl font-bold text-slate-100 font-mono tracking-tight shadow-black drop-shadow-md">Mario Castro</span>
+      </div>
+      
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center">
+        <div class="ml-10 flex items-baseline space-x-8">
+          <button (click)="portfolioService.scrollTo('about')" class="text-slate-200 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm">
+            {{ portfolioService.content().nav.about }}
+          </button>
+          <button (click)="portfolioService.scrollTo('skills')" class="text-slate-200 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm">
+            {{ portfolioService.content().nav.skills }}
+          </button>
+          <button (click)="portfolioService.scrollTo('experience')" class="text-slate-200 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors drop-shadow-sm">
+            {{ portfolioService.content().nav.experience }}
+          </button>
+          
+          <!-- Language Toggle Desktop -->
+          <button (click)="portfolioService.toggleLanguage()" class="flex items-center space-x-1 text-slate-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors border border-slate-600 hover:border-cyan-500/50 bg-slate-900/50">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
+            <span>{{ portfolioService.language() === 'en' ? 'ES' : 'EN' }}</span>
+          </button>
+
+          <button (click)="portfolioService.openContactModal()" class="bg-cyan-600 hover:bg-cyan-500 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors shadow-lg shadow-cyan-500/30 border border-cyan-400/20">
+            {{ portfolioService.content().nav.contact }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="-mr-2 flex md:hidden items-center space-x-4">
+        <!-- Language Toggle Mobile -->
+        <button (click)="portfolioService.toggleLanguage()" class="text-slate-300 hover:text-white font-mono text-sm px-2 py-1 border border-slate-700 rounded bg-slate-900/50">
+          {{ portfolioService.language() === 'en' ? 'ES' : 'EN' }}
+        </button>
+
+        <button (click)="portfolioService.toggleMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-slate-200 hover:text-white hover:bg-slate-800 focus:outline-none">
+          <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+            @if (!portfolioService.isMenuOpen()) {
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            } @else {
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            }
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  @if (portfolioService.isMenuOpen()) {
+    <div class="md:hidden bg-slate-900/95 backdrop-blur-xl border-b border-slate-800">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <button (click)="portfolioService.scrollTo('about')" class="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left">
+          {{ portfolioService.content().nav.about }}
+        </button>
+        <button (click)="portfolioService.scrollTo('skills')" class="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left">
+          {{ portfolioService.content().nav.skills }}
+        </button>
+        <button (click)="portfolioService.scrollTo('experience')" class="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left">
+          {{ portfolioService.content().nav.experience }}
+        </button>
+        <button (click)="portfolioService.openContactModal()" class="text-cyan-400 block px-3 py-2 rounded-md text-base font-medium w-full text-left">
+          {{ portfolioService.content().nav.contact }}
+        </button>
+      </div>
+    </div>
+  }
+</nav>

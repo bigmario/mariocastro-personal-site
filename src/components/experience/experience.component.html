@@ -1,0 +1,124 @@
+<!-- Experience Section -->
+<section id="experience" class="py-20 bg-slate-900/20 backdrop-blur-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-white mb-12 text-center drop-shadow-md">{{ portfolioService.content().experience.title }}</h2>
+    
+    <div class="relative max-w-4xl mx-auto">
+      <!-- Vertical Line -->
+      <div class="absolute left-4 md:left-1/2 transform md:-translate-x-px h-full w-0.5 bg-slate-700/50"></div>
+
+      @for (job of portfolioService.content().experience.jobs; track job.company; let i = $index) {
+        <div class="relative group mb-12">
+          <div class="md:flex items-center justify-between w-full">
+            
+            <!-- LEFT COLUMN (Desktop: Content for Even, Date for Odd) -->
+            <div class="md:w-5/12 mb-4 md:mb-0 md:text-right">
+                 @if (i % 2 === 0) {
+                   <!-- EVEN ITEM: CONTENT -->
+                   
+                   <!-- Mobile View -->
+                   <div class="md:hidden pl-12 relative">
+                      <!-- Mobile Dot -->
+                      <div class="absolute left-0 top-1 w-8 h-8 flex items-center justify-center">
+                         <div class="w-3 h-3 bg-cyan-400 rounded-full border-2 border-slate-900 shadow-lg shadow-cyan-500/50"></div>
+                      </div>
+                      
+                      <h3 class="text-xl font-bold text-white">{{ job.company }}</h3>
+                      <div class="text-cyan-400 font-medium mb-1">{{ job.role }}</div>
+                      <p class="text-sm text-slate-400 font-mono mb-4">{{ job.period }}</p>
+                      <ul class="list-disc pl-4 space-y-2 mb-4 text-slate-300">
+                        @for (desc of job.description; track desc) {
+                          <li class="text-sm">{{ desc }}</li>
+                        }
+                      </ul>
+                      <div class="flex flex-wrap gap-2">
+                        @for (tag of job.tech; track tag) {
+                          <span class="px-2 py-1 text-xs rounded bg-slate-800 text-slate-300 border border-slate-700">{{ tag }}</span>
+                        }
+                      </div>
+                   </div>
+
+                   <!-- Desktop View -->
+                   <div class="hidden md:block">
+                     <h3 class="text-xl font-bold text-white drop-shadow-sm">{{ job.company }}</h3>
+                     <div class="text-cyan-400 font-medium mb-2">{{ job.role }}</div>
+                     <ul class="space-y-2 mb-4">
+                       @for (desc of job.description; track desc) {
+                         <li class="text-slate-300 text-sm flex justify-end gap-3">
+                           <span class="text-right bg-slate-900/40 p-1 rounded">{{ desc }}</span>
+                           <span class="text-cyan-500 mt-1.5">•</span> 
+                         </li>
+                       }
+                     </ul>
+                     <div class="flex flex-wrap justify-end gap-2">
+                        @for (tag of job.tech; track tag) {
+                          <span class="px-2 py-1 text-xs rounded bg-slate-800/80 text-slate-300 border border-slate-700">{{ tag }}</span>
+                        }
+                     </div>
+                   </div>
+
+                 } @else {
+                   <!-- ODD ITEM: DATE (Desktop only) -->
+                   <p class="hidden md:block text-sm text-slate-400 font-mono bg-slate-900/40 inline-block px-2 rounded">{{ job.period }}</p>
+                 }
+            </div>
+
+            <!-- CENTER DOT (Desktop Only) -->
+            <div class="hidden md:flex items-center justify-center w-8 relative z-10">
+               <div class="w-3 h-3 bg-cyan-400 rounded-full border-2 border-slate-900 shadow-lg shadow-cyan-500/50"></div>
+            </div>
+
+            <!-- RIGHT COLUMN (Desktop: Date for Even, Content for Odd) -->
+            <div class="md:w-5/12 pl-12 md:pl-0">
+                 @if (i % 2 === 0) {
+                    <!-- EVEN ITEM: DATE (Desktop only) -->
+                    <p class="hidden md:block text-sm text-slate-400 font-mono text-left pl-8"><span class="bg-slate-900/40 px-2 rounded">{{ job.period }}</span></p>
+                 } @else {
+                    <!-- ODD ITEM: CONTENT -->
+                    
+                    <!-- Mobile View -->
+                    <div class="md:hidden pl-12 relative"> 
+                       <!-- Mobile Dot -->
+                       <div class="absolute left-0 top-1 w-8 h-8 flex items-center justify-center">
+                          <div class="w-3 h-3 bg-cyan-400 rounded-full border-2 border-slate-900 shadow-lg shadow-cyan-500/50"></div>
+                       </div>
+
+                       <h3 class="text-xl font-bold text-white">{{ job.company }}</h3>
+                       <div class="text-cyan-400 font-medium mb-1">{{ job.role }}</div>
+                       <p class="text-sm text-slate-400 font-mono mb-4">{{ job.period }}</p>
+                       <ul class="list-disc pl-4 space-y-2 mb-4 text-slate-300">
+                         @for (desc of job.description; track desc) {
+                           <li class="text-sm">{{ desc }}</li>
+                         }
+                       </ul>
+                       <div class="flex flex-wrap gap-2">
+                         @for (tag of job.tech; track tag) {
+                           <span class="px-2 py-1 text-xs rounded bg-slate-800 text-slate-300 border border-slate-700">{{ tag }}</span>
+                         }
+                       </div>
+                    </div>
+
+                    <!-- Desktop View -->
+                    <div class="hidden md:block pl-8">
+                      <h3 class="text-xl font-bold text-white drop-shadow-sm">{{ job.company }}</h3>
+                      <div class="text-cyan-400 font-medium mb-2">{{ job.role }}</div>
+                      <ul class="list-disc pl-4 space-y-2 mb-4 text-slate-300">
+                        @for (desc of job.description; track desc) {
+                          <li class="text-sm"><span class="bg-slate-900/40 p-1 rounded leading-loose">{{ desc }}</span></li>
+                        }
+                      </ul>
+                      <div class="flex flex-wrap gap-2">
+                        @for (tag of job.tech; track tag) {
+                          <span class="px-2 py-1 text-xs rounded bg-slate-800/80 text-slate-300 border border-slate-700">{{ tag }}</span>
+                        }
+                      </div>
+                    </div>
+                 }
+            </div>
+
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
