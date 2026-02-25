@@ -1,4 +1,10 @@
 import { Injectable, signal, computed } from '@angular/core';
+import * as pdfMakeLib from 'pdfmake/build/pdfmake';
+import * as pdfFontsLib from 'pdfmake/build/vfs_fonts';
+
+const pdfMake = (pdfMakeLib as any).default || pdfMakeLib;
+const pdfFonts = (pdfFontsLib as any).default || pdfFontsLib;
+(pdfMake as any).vfs = pdfFonts.pdfMake ? pdfFonts.pdfMake.vfs : pdfFonts.vfs;
 
 export type Lang = 'en' | 'es';
 
@@ -35,6 +41,7 @@ export class PortfolioService {
         greeting: "Hi, I'm",
         title: 'FullStack Developer | AI & Automation Specialist',
         description: 'Transforming complex problems into scalable solutions. Expert in bridging the gap between robust backend architecture and intuitive frontend experiences.',
+        downloadCV: 'Download CV'
       },
       about: {
         title: 'About Me',
@@ -162,6 +169,7 @@ export class PortfolioService {
         greeting: "Hola, soy",
         title: 'Desarrollador FullStack | Especialista en IA y Automatización',
         description: 'Transformando problemas complejos en soluciones escalables. Experto en unir arquitectura backend robusta con experiencias frontend intuitivas.',
+        downloadCV: 'Descargar CV'
       },
       about: {
         title: 'Sobre Mí',
@@ -306,5 +314,95 @@ export class PortfolioService {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+  }
+
+  generateCV() {
+    const lang = this.language();
+    const content = this.content();
+    const profile = this.profile;
+
+    const docDefinition: any = {
+      info: {
+        title: `${profile.name}_CV`,
+        author: profile.name,
+        subject: 'Curriculum Vitae',
+        keywords: 'CV, Resume, FullStack Developer, AI, Automation',
+        creator: 'Portfolio Generator'
+      },
+      content: [
+        { text: profile.name, style: 'header' },
+        { text: content.hero.title, style: 'subHeader' },
+        { 
+          text: `${profile.email} | ${profile.phone} | ${profile.linkedin} | ${profile.github}`, 
+          style: 'contactInfo',
+          margin: [0, 0, 0, 15]
+        },
+
+        // Profile Summary
+        { text: content.about.title.toUpperCase(), style: 'sectionHeader' },
+        { text: content.about.summary, style: 'paragraph' },
+
+        // Experience
+        { text: content.experience.title.toUpperCase(), style: 'sectionHeader' },
+        ...content.experience.jobs.map(job => [
+          {
+            columns: [
+              { text: job.role, style: 'jobTitle' },
+              { text: job.period, alignment: 'right', style: 'jobPeriod' }
+            ]
+          },
+          { text: job.company, style: 'companyName' },
+          {
+            ul: job.description,
+            style: 'list'
+          },
+          { text: `Tech Stack: ${job.tech.join(', ')}`, style: 'techStack' }
+        ]).flat(),
+
+        // Skills
+        { text: content.skills.title.toUpperCase(), style: 'sectionHeader' },
+        ...content.skills.groups.map(group => [
+          { text: group.category + ':', style: 'skillCategory' },
+          { text: group.items.join(', '), style: 'skillItems' }
+        ]).flat(),
+
+        // Education
+        { text: content.about.education.title.toUpperCase(), style: 'sectionHeader' },
+        {
+          columns: [
+            { text: content.about.education.degree, style: 'jobTitle' },
+            { text: '1997 - 2007', alignment: 'right', style: 'jobPeriod' }
+          ]
+        },
+        { text: content.about.education.school, style: 'companyName' },
+        
+        // Languages
+        { text: content.about.languages.title.toUpperCase(), style: 'sectionHeader', margin: [0, 15, 0, 5] },
+        {
+          ul: content.about.languages.items.map(lang => `${lang.name} - ${lang.level}`),
+          style: 'list'
+        }
+      ],
+      styles: {
+        header: { fontSize: 22, bold: true, alignment: 'center', margin: [0, 0, 0, 5] },
+        subHeader: { fontSize: 14, alignment: 'center', margin: [0, 0, 0, 5] },
+        contactInfo: { fontSize: 10, alignment: 'center' },
+        sectionHeader: { fontSize: 12, bold: true, margin: [0, 15, 0, 5], decoration: 'underline' },
+        paragraph: { fontSize: 10, margin: [0, 0, 0, 10], lineHeight: 1.2 },
+        jobTitle: { fontSize: 11, bold: true },
+        jobPeriod: { fontSize: 10, italics: true },
+        companyName: { fontSize: 10, bold: true, margin: [0, 2, 0, 5] },
+        list: { fontSize: 10, margin: [0, 0, 0, 5], lineHeight: 1.2 },
+        techStack: { fontSize: 9, italics: true, margin: [0, 0, 0, 10] },
+        skillCategory: { fontSize: 10, bold: true, margin: [0, 5, 0, 2] },
+        skillItems: { fontSize: 10, margin: [0, 0, 0, 5] }
+      },
+      defaultStyle: {
+        font: 'Roboto',
+        columnGap: 20
+      }
+    };
+
+    pdfMake.createPdf(docDefinition).download(`Mario_Castro_CV_${lang.toUpperCase()}.pdf`);
   }
 }

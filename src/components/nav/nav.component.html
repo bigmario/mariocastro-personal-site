@@ -25,6 +25,12 @@
             <span>{{ portfolioService.language() === 'en' ? 'ES' : 'EN' }}</span>
           </button>
 
+          <button (click)="portfolioService.generateCV()" class="flex items-center space-x-1 text-cyan-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors border border-cyan-500/30 hover:border-cyan-400 bg-cyan-950/30 hover:bg-cyan-900/50">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span class="hidden lg:inline">{{ portfolioService.content().hero.downloadCV }}</span>
+            <span class="inline lg:hidden">CV</span>
+          </button>
+
           <button (click)="portfolioService.openContactModal()" class="bg-cyan-600 hover:bg-cyan-500 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors shadow-lg shadow-cyan-500/30 border border-cyan-400/20">
             {{ portfolioService.content().nav.contact }}
           </button>
@@ -63,6 +69,9 @@
         </button>
         <button (click)="portfolioService.scrollTo('experience')" class="text-slate-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left">
           {{ portfolioService.content().nav.experience }}
+        </button>
+        <button (click)="portfolioService.generateCV()" class="text-cyan-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left">
+          {{ portfolioService.content().hero.downloadCV }}
         </button>
         <button (click)="portfolioService.openContactModal()" class="text-cyan-400 block px-3 py-2 rounded-md text-base font-medium w-full text-left">
           {{ portfolioService.content().nav.contact }}
