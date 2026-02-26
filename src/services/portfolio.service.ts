@@ -353,7 +353,7 @@ export class PortfolioService {
           },
           { text: job.company, style: 'companyName' },
           {
-            ul: job.description,
+            ul: [...job.description],
             style: 'list'
           },
           { text: `Tech Stack: ${job.tech.join(', ')}`, style: 'techStack' }
